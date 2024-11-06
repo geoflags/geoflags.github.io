@@ -52,8 +52,8 @@ Date.prototype.getDayOfYear = function() {
 //}
 
 function randomgeographic(day, month, year, lat, lon) {
-  const randomLat = Math.floor(lat) + (getDailyRandomNumber() * 0.001); // добавляем случайное значение от 0 до 0.001 к широте
-  const randomLon = Math.floor(lon) + (Math.pow(getDailyRandomNumber(),2) * 0.001); // добавляем случайное значение от 0 до 0.001 к долготе
+  const randomLat = Math.floor(lat) + getDailyRandomNumber(); // добавляем случайное значение от 0 до 0.001 к широте
+  const randomLon = Math.floor(lon) + Math.pow(getDailyRandomNumber(),2); // добавляем случайное значение от 0 до 0.001 к долготе
   return [randomLat.toFixed(6), randomLon.toFixed(6)];
 }
 
