@@ -3,6 +3,8 @@
 <head>
     <title>GEOFLAGS</title>
     <meta charset="utf-8" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.2.0/crypto-js.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.2.0/sha256.min.js"></script>
   <script>
     function encode(text) {
   let buf = new TextEncoder().encode(text);
@@ -22,8 +24,31 @@ function _get_lon(day, year, month) {
   return parseFloat('0.' + to_dec((day**2).toString() + month.toString() + year.toString()).toFixed(6));
 }
 
+function getDailyRandomNumber() {
+    // Получаем текущую дату
+    const date = new Date();
+    const dayOfYear = date.getFullYear() * 1000 + date.getDayOfYear();
+
+    // Используем хеш-функцию для генерации случайного числа
+    const hashedDay = CryptoJS.SHA256(dayOfYear.toString());
+
+    // Преобразуем хеш в число от 0 до 1
+    const randomNumber = parseInt(hashedDay, 16) / (2 ** 256);
+
+    return randomNumber;
+}
+
+// Дополнительная функция для получения дня года
+Date.prototype.getDayOfYear = function() {
+    const firstDayOfYear = new Date(this.getFullYear(), 0, 1);
+    const pastDaysOfYear = (this - firstDayOfYear) / 86400000;
+    return Math.floor(pastDaysOfYear) + 1;
+};
+
+
 function randomgeographic(day, month, year, lat, lon) {
-  return [(Math.floor(lat) + _get_lat(day, year, month)).toFixed(6), (Math.floor(lon) + _get_lon(day, year, month)).toFixed(6)];
+  // return [(Math.floor(lat) + _get_lat(day, year, month)).toFixed(6), (Math.floor(lon) + _get_lon(day, year, month)).toFixed(6)];
+    return [Math.floor(lat) + getDailyRandomNumber().toFixed(6), Math.floor(lat) + getDailyRandomNumber()**2.toFixed(6)];
 }
   </script>
     <link 
