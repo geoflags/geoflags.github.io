@@ -46,10 +46,17 @@ Date.prototype.getDayOfYear = function() {
 };
 
 
+//function randomgeographic(day, month, year, lat, lon) {
+//  // return [(Math.floor(lat) + _get_lat(day, year, month)).toFixed(6), (Math.floor(lon) + _get_lon(day, year, month)).toFixed(6)];
+//    return [Math.floor(lat) + getDailyRandomNumber().toFixed(6), Math.floor(lat) + getDailyRandomNumber()**2.toFixed(6)];
+//}
+
 function randomgeographic(day, month, year, lat, lon) {
-  // return [(Math.floor(lat) + _get_lat(day, year, month)).toFixed(6), (Math.floor(lon) + _get_lon(day, year, month)).toFixed(6)];
-    return [Math.floor(lat) + getDailyRandomNumber().toFixed(6), Math.floor(lat) + getDailyRandomNumber()**2.toFixed(6)];
+  const randomLat = Math.floor(lat) + (getDailyRandomNumber() * 0.001); // добавляем случайное значение от 0 до 0.001 к широте
+  const randomLon = Math.floor(lon) + (getDailyRandomNumber().pow(2) * 0.001); // добавляем случайное значение от 0 до 0.001 к долготе
+  return [randomLat.toFixed(6), randomLon.toFixed(6)];
 }
+
   </script>
     <link 
         rel="stylesheet" 
