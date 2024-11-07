@@ -93,7 +93,7 @@ let month = currentDate.getMonth() + 1;
 let year = currentDate.getFullYear();
     // randomgeographic's point here     
   let coords = randomgeographic (day, month, year, latitude, longitude);          L.marker(coords).addTo(map)
-                .bindPopup("This is randomgeographic's point. " + coords[0] + ", " + coords[1])
+                .bindPopup("This is randomgeographic's point. " + coords[0] + ", " + coords[1] + "<br><a href=\"yandexnavi://build_route_on_map?lat_to="+coords[0]+"&lon_to="+coords[1]+"\">Яндекс Навигатор</a>")
                 .openPopup();
         }
 
